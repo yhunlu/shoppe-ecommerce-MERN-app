@@ -1,5 +1,13 @@
-function App() {
-  return <h1 className="text-3xl font-bold underline">Hello World!</h1>;
-}
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Header from './components/Header';
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Header />
+    </BrowserRouter>
+  );
+};
 
 export default App;
