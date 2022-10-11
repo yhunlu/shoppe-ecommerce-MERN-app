@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/api/products', (req, res) => {
   res.send(products);
   //   res.send('API is running...');
 });

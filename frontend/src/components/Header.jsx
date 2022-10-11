@@ -11,7 +11,7 @@ const Header = () => {
 
   let Items = 10;
   return (
-    <nav className="w-full flex md:justify-center justify-between items-center p-4">
+    <nav className="w-full flex justify-between items-center p-4">
       <div className="md:flex-[0.5] flex-initial justify-center items-center text-purple-500 text-lg mr-40">
         <Link to="/" passhref="true">
           <div className="text-green-900 font-bold flex items-center">

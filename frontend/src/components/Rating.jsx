@@ -3,7 +3,7 @@ import Rate from "./common/rate";
 
 const Rating = ({ value, text }) => {
   return (
-    <div className="rating">
+    <div className="flex items-center">
       <Rate value={value} starRange={1} />
       <Rate value={value} starRange={2} />
       <Rate value={value} starRange={3} />
