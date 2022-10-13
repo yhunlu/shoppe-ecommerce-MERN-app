@@ -33,11 +33,13 @@ const Product = ({ product }) => {
             {product.rating} out of 5 stars
           </p>
           <div className="flex items-center">
-            {[0, 1, 2, 3, 4].map((rating) => (
+            {[1, 2, 3, 4, 5].map((rating) => (
               <StarIcon
                 key={rating}
                 className={classNames(
-                  product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                  product.rating >= rating
+                    ? 'text-yellow-400'
+                    : 'text-gray-200',
                   'flex-shrink-0 h-5 w-5'
                 )}
                 aria-hidden="true"

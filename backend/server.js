@@ -5,6 +5,7 @@ import colors from 'colors';
 
 import connectDB from './config/connectDB.js';
 import products from './data/products.js';
+import users from './data/users.js';
 
 dotenv.config();
 
@@ -20,7 +21,10 @@ app.use(express.json());
 
 app.get('/api/products', (req, res) => {
   res.send(products);
-  //   res.send('API is running...');
+});
+
+app.get('/api/users', (req, res) => {
+  res.send(users);
 });
 
 const PORT = process.env.PORT || 3001;

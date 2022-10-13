@@ -11,10 +11,10 @@ import {
 import logo from '../assets/logo.png';
 
 const user = {
-  name: 'Chelsea Hagon',
+  name: 'yunlu',
   email: 'chelsea.hagon@example.com',
   imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    'https://lh3.googleusercontent.com/ogw/AOh-ky1n90iEadqapvW4khtAkqdDTjUIC_hXzJCjhWGt=s64-c-mo',
 };
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },

@@ -1,12 +1,25 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 const users = [
   {
-    name: 'Admin User',
-    email: 'admin@example.com',
-    password: bcrypt.hashSync('123456', 10),
+    name: 'Yahya UNLU',
+    email: 'yhunlu87@gmail.com',
+    imageUrl: 'https://lh3.googleusercontent.com/ogw/AOh-ky1n90iEadqapvW4khtAkqdDTjUIC_hXzJCjhWGt=s64-c-mo',
+    password: bcrypt.hashSync('1234', 8),
     isAdmin: true,
-    isSeller: false,
+    isSeller: true,
+    seller: {
+      name: 'UNLU Electronics',
+      logo: '/images/yhunlu87-seller-logo.png',
+      rating: 4.5,
+      numReviews: 120,
+    },
+  },
+  {
+    name: 'John Moonshine',
+    email: 'user@example.com',
+    password: bcrypt.hashSync('1234', 8),
+    isAdmin: false,
   },
 ];
 
