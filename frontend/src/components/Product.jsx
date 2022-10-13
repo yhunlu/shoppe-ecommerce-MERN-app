@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { StarIcon } from '@heroicons/react/24/solid';
+import { StarIcon } from '@heroicons/react/solid';
 
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');

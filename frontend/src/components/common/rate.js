@@ -1,5 +1,5 @@
 import React from 'react';
-import { StarIcon } from '@heroicons/react/24/solid';
+import { StarIcon } from '@heroicons/react/solid';
 
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
