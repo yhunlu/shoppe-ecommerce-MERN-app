@@ -11,21 +11,21 @@ const Product = ({ product }) => {
       key={product._id}
       className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden shadow-xl"
     >
-      <div class="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
-        <Link to={`/product/${product._id}`}>
+      <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
+        <Link to={`/products/${product._id}`}>
           <img
             className="w-full h-full object-center object-cover sm:w-full sm:h-full"
-            src={product.image}
-            alt={product.name}
+            src={product.images[0].src}
+            alt={product.images[0].alt}
           />
         </Link>
       </div>
       <div className="flex-1 p-4 space-y-2 flex flex-col">
         <h3 className="text-sm font-medium text-gray-900">
-          <a href={product.href}>
+          <Link to={`/products/${product._id}`}>
             <span aria-hidden="true" className="absolute inset-0" />
             {product.name}
-          </a>
+          </Link>
         </h3>
         <p className="text-sm text-gray-500">{product.description}</p>
         <div className="mt-3 flex flex-col items-center">

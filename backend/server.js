@@ -7,6 +7,7 @@ import path from 'path';
 import connectDB from './config/connectDB.js';
 import products from './data/products.js';
 import users from './data/users.js';
+import productRouter from './routers/productRouter.js';
 
 dotenv.config();
 
@@ -20,9 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 
-app.get('/api/products', (req, res) => {
-  res.send(products);
-});
+app.use('/api/products', productRouter);
 
 app.get('/api/users', (req, res) => {
   res.send(users);

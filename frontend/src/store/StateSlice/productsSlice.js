@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const productsSlice = createSlice({
-  name: 'products',
+  name: 'productsList',
   initialState: {
-    productLists: [],
+    products: [],
     loading: true,
   },
   reducers: {
@@ -13,7 +13,7 @@ const productsSlice = createSlice({
     },
     PRODUCT_LIST_SUCCESS: (products, action) => {
       products.loading = false;
-      products.productLists = action.payload;
+      products.products = action.payload.products;
     },
     PRODUCT_LIST_FAIL: (products, action) => {
       products.error = action.payload;
@@ -39,6 +39,12 @@ export const listProducts = () => async (dispatch) => {
 
     dispatch({ type: PRODUCT_LIST_SUCCESS.type, payload: data });
   } catch (error) {
-    dispatch({ type: PRODUCT_LIST_FAIL.type, payload: error.message });
+    dispatch({
+      type: PRODUCT_LIST_FAIL.type,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
 };
