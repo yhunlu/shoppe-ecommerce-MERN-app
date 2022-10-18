@@ -11,8 +11,8 @@ const selectMenu = ({ values, selected, setSelected }) => {
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block text-sm font-medium text-gray-700">
-            Quantity
+          <Listbox.Label className="block text-sm font-bold text-gray-700">
+            Select Quantity
           </Listbox.Label>
           <div className="mt-1 relative">
             <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-md pl-3 pr-16 py-2 text-left font-bold cursor-default focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm">

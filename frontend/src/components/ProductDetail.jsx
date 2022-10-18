@@ -22,7 +22,7 @@ const ProductDetail = ({ product, selected, setSelected }) => {
             {product?.images.map((image) => (
               <Tab
                 key={image.id}
-                className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
+                className="shadow-xl relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
               >
                 {({ selected }) => (
                   <>
@@ -48,13 +48,13 @@ const ProductDetail = ({ product, selected, setSelected }) => {
           </Tab.List>
         </div>
 
-        <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
+        <Tab.Panels className="w-full aspect-w-1 aspect-h-1 shadow-md">
           {product?.images.map((image) => (
             <Tab.Panel key={image.id}>
               <img
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-center object-cover sm:rounded-lg"
+                className="w-full h-full object-center object-cover shadow-md sm:rounded-lg"
               />
             </Tab.Panel>
           ))}
@@ -93,7 +93,7 @@ const ProductDetail = ({ product, selected, setSelected }) => {
             <p className="sr-only">{product.rating} out of 5 stars</p>
             <div className="ml-4 flex">
               <a
-                href="#"
+                href="/reviews"
                 className="text-sm font-medium text-green-600 hover:text-green-500"
               >
                 See all {product.numReviews} reviews
@@ -132,8 +132,8 @@ const ProductDetail = ({ product, selected, setSelected }) => {
               type="button"
               className="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
             >
-              <HeartIcon className="h-6 w-6 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Add to favorites</span>
+              <HeartIcon className="h-6 w-6 flex-shrink-0" aria-hidden="true" />
             </button>
           </div>
         </form>
