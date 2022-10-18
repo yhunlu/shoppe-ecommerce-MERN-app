@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { LoadingBox, MessageBox, ProductDetail } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,8 @@ import { detailsProduct } from '../store/StateSlice/productDetailSlice';
 import { useParams } from 'react-router-dom';
 
 const ProductScreen = () => {
+  const [selected, setSelected] = useState(1);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   // productsSlice -> name is "productDetail"
@@ -36,7 +38,7 @@ const ProductScreen = () => {
           <>
             <div key="productDetail">
               <h2 className="sr-only">Product Detail</h2>
-              <ProductDetail key={product._id} product={product} />
+              <ProductDetail key={product._id} product={product} selected={selected} setSelected={setSelected} />
             </div>
           </>
         )}

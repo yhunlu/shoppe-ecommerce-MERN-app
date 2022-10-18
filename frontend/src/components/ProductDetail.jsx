@@ -2,12 +2,13 @@ import React from 'react';
 import { Tab } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid';
 import { HeartIcon } from '@heroicons/react/outline';
+import { SelectMenu } from './common';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const ProductDetail = ({ product }) => {
+const ProductDetail = ({ product, selected, setSelected }) => {
   return (
     <div
       key={product._id}
@@ -68,7 +69,7 @@ const ProductDetail = ({ product }) => {
 
         <div className="mt-3">
           <h2 className="sr-only">Product information</h2>
-          <p className="text-3xl text-gray-900">{product.price}</p>
+          <p className="text-3xl text-gray-900">{`${'$' + product.price}`}</p>
         </div>
 
         {/* Reviews */}
@@ -90,6 +91,14 @@ const ProductDetail = ({ product }) => {
               ))}
             </div>
             <p className="sr-only">{product.rating} out of 5 stars</p>
+            <div className="ml-4 flex">
+              <a
+                href="#"
+                className="text-sm font-medium text-green-600 hover:text-green-500"
+              >
+                See all {product.numReviews} reviews
+              </a>
+            </div>
           </div>
         </div>
 
@@ -103,6 +112,14 @@ const ProductDetail = ({ product }) => {
         </div>
 
         <form className="mt-6">
+          <div className="flex items-center space-x-3">
+            <p className="sr-only">Choose Quantity</p>
+            <SelectMenu
+              values={product.countInStock}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          </div>
           <div className="mt-10 flex sm:flex-col1">
             <button
               type="submit"

@@ -6,7 +6,6 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
 };
 const Product = ({ product }) => {
-
   return (
     <div
       key={product._id}
@@ -52,7 +51,9 @@ const Product = ({ product }) => {
           </p>
         </div>
         <div className="flex-1 flex flex-col justify-end items-center">
-          <p className="font-medium text-gray-900 text-2xl">{`${product.price} $`}</p>
+          <p className="font-medium text-gray-900 text-2xl">{`${
+            '$' + product.price
+          }`}</p>
         </div>
       </div>
     </div>
