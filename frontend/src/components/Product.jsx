@@ -6,6 +6,7 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
 };
 const Product = ({ product }) => {
+
   return (
     <div
       key={product._id}

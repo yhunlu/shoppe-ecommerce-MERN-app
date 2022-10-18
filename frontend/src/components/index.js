@@ -5,4 +5,3 @@ export { default as Rating } from './Rating';
 export { default as NavBar } from './NavBar';
 export { default as Product } from './Product';
 export { default as ProductDetail } from './ProductDetail';
-

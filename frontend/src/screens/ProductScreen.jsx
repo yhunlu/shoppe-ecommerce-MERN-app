@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { detailsProduct } from '../store/StateSlice/productDetailSlice';
 import { useParams } from 'react-router-dom';
 
-
-
 const ProductScreen = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -35,7 +33,12 @@ const ProductScreen = () => {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <ProductDetail key={product.id} product={product} />
+          <>
+            <div key="productDetail">
+              <h2 className="sr-only">Product Detail</h2>
+              <ProductDetail key={product._id} product={product} />
+            </div>
+          </>
         )}
       </div>
     </div>
