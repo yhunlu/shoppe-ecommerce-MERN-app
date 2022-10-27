@@ -9,7 +9,7 @@ const Product = ({ product }) => {
   return (
     <div
       key={product._id}
-      className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden shadow-xl"
+      className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden shadow-lg hover:shadow-2xl"
     >
       <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
         <Link to={`/products/${product._id}`}>

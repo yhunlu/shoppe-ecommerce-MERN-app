@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/outline';
 
 import logo from '../assets/logo.png';
+import { useDispatch, useSelector } from 'react-redux';
 
 const user = {
   name: 'yunlu',
@@ -43,6 +44,12 @@ function classNames(...classes) {
 }
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+  // cartSlice -> name is "cartItem"
+  // cartSlice -> initial "items"
+  const cartItem = useSelector((state) => state.cartItem);
+  const { Items } = cartItem;
+
   return (
     <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
@@ -51,7 +58,7 @@ const NavBar = () => {
         className={({ open }) =>
           classNames(
             open ? 'fixed inset-0 z-40 overflow-y-auto' : '',
-            'bg-white shadow-md lg:static lg:overflow-y-visible'
+            'bg-white lg:static lg:overflow-y-visible'
           )
         }
       >
@@ -111,11 +118,23 @@ const NavBar = () => {
                     className="group -m-2 p-2 flex items-center bg-white rounded-full hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                   >
                     <ShoppingBagIcon
-                      className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                      className={classNames(
+                        Items?.length > 0
+                          ? 'text-green-600 hover:text-green-400'
+                          : 'text-gray-400 group-hover:text-gray-500',
+                        'flex-shrink-0 h-6 w-6'
+                      )}
                       aria-hidden="true"
                     />
-                    <span className="ml-1 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      0
+                    <span
+                      className={classNames(
+                        Items?.length > 0
+                          ? '-mt-5 -ml-1 inline-flex items-center px-2.5 py-1 rounded-full bg-green-600 text-white'
+                          : 'text-gray-700 group-hover:text-gray-800',
+                        'font-bold  text-sm'
+                      )}
+                    >
+                      {Items?.length > 0 ? Items.length : ''}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>

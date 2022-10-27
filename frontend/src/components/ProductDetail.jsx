@@ -3,12 +3,19 @@ import { Tab } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid';
 import { HeartIcon } from '@heroicons/react/outline';
 import { SelectMenu } from './common';
+import { useNavigate } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 const ProductDetail = ({ product, selected, setSelected }) => {
+  const navigate = useNavigate();
+
+  const addToCartHandler = () => {
+    navigate(`/cart/${product._id}?qty=${selected}`);
+  };
+
   return (
     <div
       key={product._id}
@@ -113,17 +120,32 @@ const ProductDetail = ({ product, selected, setSelected }) => {
 
         <form className="mt-6">
           <div className="flex items-center space-x-3">
-            <p className="sr-only">Choose Quantity</p>
-            <SelectMenu
-              values={product.countInStock}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            {product.countInStock > 0 ? (
+              <>
+                <p className="sr-only">Choose Quantity</p>
+                <SelectMenu
+                  values={product.countInStock}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </>
+            ) : (
+              <p className="mt-2 ml-24 justify-center font-bold text-amber-600 hover:bg-red-100">
+                OUT OF STOCK
+              </p>
+            )}
           </div>
           <div className="mt-10 flex sm:flex-col1">
             <button
               type="submit"
-              className="max-w-xs flex-1 bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500 sm:w-full"
+              className={classNames(
+                product.countInStock > 0
+                  ? 'bg-green-600 hover:bg-green-700 focus:ring-green-500'
+                  : 'bg-gray-300',
+                'max-w-xs flex-1 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full'
+              )}
+              disabled={product.countInStock === 0}
+              onClick={addToCartHandler}
             >
               Add to bag
             </button>

@@ -6,7 +6,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const selectMenu = ({ values, selected, setSelected }) => {
+const SelectMenu = ({ values, selected, setSelected }) => {
+
   return (
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -84,4 +85,4 @@ const selectMenu = ({ values, selected, setSelected }) => {
   );
 };
 
-export default selectMenu;
+export default SelectMenu;

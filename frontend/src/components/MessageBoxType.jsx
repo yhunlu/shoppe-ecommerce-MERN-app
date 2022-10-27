@@ -23,22 +23,6 @@ const MessageBoxType = ({ variant, children }) => {
               <div className="mt-2 text-sm text-blue-700">
                 <p>{children}</p>
               </div>
-              <div className="mt-4">
-                <div className="-mx-2 -my-1.5 flex">
-                  <button
-                    type="button"
-                    className="bg-blue-50 px-2 py-1.5 rounded-md text-sm font-medium text-blue-800 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-50 focus:ring-blue-600"
-                  >
-                    View status
-                  </button>
-                  <button
-                    type="button"
-                    className="ml-3 bg-blue-50 px-2 py-1.5 rounded-md text-sm font-medium text-blue-800 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-50 focus:ring-blue-600"
-                  >
-                    Dismiss
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -56,22 +40,6 @@ const MessageBoxType = ({ variant, children }) => {
             <div className="ml-3">
               <div className="mt-2 text-sm text-green-700">
                 <p>{children}</p>
-              </div>
-              <div className="mt-4">
-                <div className="-mx-2 -my-1.5 flex">
-                  <button
-                    type="button"
-                    className="bg-green-50 px-2 py-1.5 rounded-md text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600"
-                  >
-                    View status
-                  </button>
-                  <button
-                    type="button"
-                    className="ml-3 bg-green-50 px-2 py-1.5 rounded-md text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600"
-                  >
-                    Dismiss
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -91,22 +59,6 @@ const MessageBoxType = ({ variant, children }) => {
               <div className="mt-2 text-sm text-red-700">
                 <p>{children}</p>
               </div>
-              <div className="mt-4">
-                <div className="-mx-2 -my-1.5 flex">
-                  <button
-                    type="button"
-                    className="bg-red-50 px-2 py-1.5 rounded-md text-sm font-medium text-red-800 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-50 focus:ring-red-600"
-                  >
-                    View status
-                  </button>
-                  <button
-                    type="button"
-                    className="ml-3 bg-red-50 px-2 py-1.5 rounded-md text-sm font-medium text-red-800 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-50 focus:ring-red-600"
-                  >
-                    Dismiss
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -124,22 +76,6 @@ const MessageBoxType = ({ variant, children }) => {
             <div className="ml-3">
               <div className="mt-2 text-sm text-yellow-700">
                 <p>{children}</p>
-              </div>
-              <div className="mt-4">
-                <div className="-mx-2 -my-1.5 flex">
-                  <button
-                    type="button"
-                    className="bg-yellow-50 px-2 py-1.5 rounded-md text-sm font-medium text-yellow-800 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-50 focus:ring-yellow-600"
-                  >
-                    View status
-                  </button>
-                  <button
-                    type="button"
-                    className="ml-3 bg-yellow-50 px-2 py-1.5 rounded-md text-sm font-medium text-yellow-800 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-50 focus:ring-yellow-600"
-                  >
-                    Dismiss
-                  </button>
-                </div>
               </div>
             </div>
           </div>
