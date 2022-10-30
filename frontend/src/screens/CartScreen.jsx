@@ -5,18 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/StateSlice/cartSlice';
 
 const CartScreen = () => {
-  const [selected, setSelected] = useState(0);
-
   const { id } = useParams();
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-  const qty = searchParams.has('qty') ? searchParams.get('qty') : 1;
+  const qty = searchParams.has('qty') ? Number(searchParams.get('qty')) : 1;
 
   const dispatch = useDispatch();
   // cartSlice -> name is "cartItem"
   // cartSlice -> initial "items"
   const cartItem = useSelector((state) => state.cartItem);
-  const { Items: products } = cartItem;
+  const { Items: products, loading } = cartItem;
 
   useEffect(() => {
     if (id) {
@@ -45,8 +43,6 @@ const CartScreen = () => {
       <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <ShoppingCarts
           products={products}
-          selected={selected}
-          setSelected={setSelected}
         />
       </div>
     </div>

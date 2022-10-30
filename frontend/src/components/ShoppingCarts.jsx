@@ -7,10 +7,10 @@ import {
 } from '@heroicons/react/solid';
 import { SelectMenu } from './common';
 import { Link } from 'react-router-dom';
-import { removeFromCart } from '../store/StateSlice/cartSlice';
+import { addToCart, removeFromCart } from '../store/StateSlice/cartSlice';
 import { useDispatch } from 'react-redux';
 
-const ShoppingCarts = ({ products, selected, setSelected }) => {
+const ShoppingCarts = ({ products }) => {
   const dispatch = useDispatch();
 
   const removeFromCartHandler = (id) => {
@@ -69,14 +69,31 @@ const ShoppingCarts = ({ products, selected, setSelected }) => {
                         Quantity, {product.name}
                       </label>
 
-                     <div className="mt-10">
-                     <SelectMenu
-                        values={product.countInStock}
-                        selected={product.qty}
-                        setSelected={setSelected}
-                      />
-                     </div>
-
+                      <div className="flex justify-between items-center mt-5 mr-auto">
+                        <span className="font-bold text-sm">
+                          Select Quantity
+                        </span>
+                          <select
+                            className="flex z-10 mt-1 w-auto bg-white shadow-md max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm focus:ring-1 focus:ring-green-500 focus:border-green-500"
+                            value={product.qty}
+                            onChange={(e) =>
+                              dispatch(
+                                addToCart(
+                                  product.product,
+                                  Number(e.target.value)
+                                )
+                              )
+                            }
+                          >
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option className="cursor-default select-none relative py-2 pl-8 pr-4 text-green-600 font-bold" key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
+                          </select>
+                      </div>
 
                       <div className="absolute -top-8 right-2">
                         <button
