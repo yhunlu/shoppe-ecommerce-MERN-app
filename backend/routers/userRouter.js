@@ -10,22 +10,23 @@ const userRouter = express.Router();
 userRouter.post(
   '/signin',
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findOne({ email: req.body.email });
-    if (user) {
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        res.send({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          imageUrl: user.imageUrl,
-          isAdmin: user.isAdmin,
-          isSeller: user.isSeller,
-          token: generateToken(user),
-        });
-        return;
-      }
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (user && bcrypt.compareSync(password, user.password)) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        imageUrl: user.imageUrl,
+        isAdmin: user.isAdmin,
+        isSeller: user.isSeller,
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(401).json({ message: 'Invalid email or password' });
     }
-    res.status(401).send({ message: 'Invalid email or password' });
   })
 );
 
@@ -39,7 +40,7 @@ userRouter.post(
       password: bcrypt.hashSync(req.body.password, 8),
     });
     const createdUser = await user.save();
-    res.send({
+    res.json({
       _id: createdUser._id,
       name: createdUser.name,
       email: createdUser.email,
@@ -56,9 +57,9 @@ userRouter.get(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
-      res.send(user);
+      res.json(user);
     } else {
-      res.status(404).send({ message: 'User Not Found' });
+      res.status(404).json({ message: 'User Not Found' });
     }
   })
 );

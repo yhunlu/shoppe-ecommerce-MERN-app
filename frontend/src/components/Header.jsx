@@ -24,7 +24,7 @@ const Header = () => {
         <li className="mx-10 cursor-pointer">
           <Link to="/cart">
             <li className="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-green-900 hover:text-green-500">
-              <a href="/cart" className="relative flex">
+              <Link to="/cart" className="relative flex">
                 <svg
                   className="flex-1 w-10 h-6 fill-current"
                   viewBox="0 0 40 24"
@@ -38,7 +38,7 @@ const Header = () => {
                   {/* {Items.length > 0 ? Items.length : 0} */}
                   {Items}
                 </span>
-              </a>
+              </Link>
             </li>
           </Link>
           {/* <Link to="/profile">
@@ -70,7 +70,7 @@ const Header = () => {
             <li className="mx-10 cursor-pointer">
               <Link to="/cart">
                 <li className="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-green-900 hover:text-green-500">
-                  <a href="/cart" className="relative flex">
+                  <Link to="/cart" className="relative flex">
                     <svg
                       className="flex-1 w-10 h-6 fill-current"
                       viewBox="0 0 40 24"
@@ -84,7 +84,7 @@ const Header = () => {
                       {/* {Items.length > 0 ? Items.length : 0} */}
                       {Items}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               </Link>
               {/* <div className="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle ">

@@ -13,13 +13,6 @@ import logo from '../assets/logo.png';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-// const user = {
-//   name: 'yunlu',
-//   email: 'chelsea.hagon@example.com',
-//   imageUrl:
-//     'https://lh3.googleusercontent.com/ogw/AOh-ky1n90iEadqapvW4khtAkqdDTjUIC_hXzJCjhWGt=s64-c-mo',
-// };
-
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Calendar', href: '#', current: false },
@@ -75,13 +68,13 @@ const NavBar = () => {
               <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
                 <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
                   <div className="flex-shrink-0 flex items-center">
-                    <a href="/">
+                    <Link to="/">
                       <img
                         className="block h-14 w-auto"
                         src={logo}
                         alt="logo"
                       />
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">

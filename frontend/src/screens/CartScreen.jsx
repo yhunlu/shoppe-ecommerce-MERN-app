@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { MessageBox, ShoppingCarts } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/StateSlice/cartSlice';
@@ -27,12 +27,12 @@ const CartScreen = () => {
       <div className="mx-auto mt-20">
         <MessageBox variant="info">
           Oh Sorry, We couldn't find any product in bag.{' '}
-          <a
-            href="/"
+          <Link
+            to="/"
             className="font-bold underline text-blue-800 hover:text-blue-300"
           >
             Start shopping...
-          </a>
+          </Link>
         </MessageBox>
       </div>
     );

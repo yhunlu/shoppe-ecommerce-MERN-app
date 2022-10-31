@@ -3,8 +3,9 @@ import bcrypt from 'bcryptjs';
 const users = [
   {
     name: 'Yahya UNLU',
-    email: 'yhunlu87@gmail.com',
-    imageUrl: 'https://lh3.googleusercontent.com/ogw/AOh-ky1n90iEadqapvW4khtAkqdDTjUIC_hXzJCjhWGt=s64-c-mo',
+    email: 'yhunlu@gmail.com',
+    imageUrl:
+      'https://lh3.googleusercontent.com/ogw/AOh-ky1n90iEadqapvW4khtAkqdDTjUIC_hXzJCjhWGt=s64-c-mo',
     password: bcrypt.hashSync('1234', 8),
     isAdmin: true,
     isSeller: true,

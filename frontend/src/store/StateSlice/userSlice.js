@@ -1,23 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
+const userFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
-  : { userInfo: [] };
+  : {};
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: userInfoFromStorage,
+  initialState: { userInfo: userFromStorage },
   reducers: {
     USER_SIGNIN_REQUEST: (user) => {
       user.loading = true;
     },
     USER_SIGNIN_SUCCESS: (user, action) => {
       user.loading = false;
-      user.products = action.payload.userInfo;
+      user.userInfo = action.payload;
     },
     USER_SIGNIN_FAIL: (user, action) => {
-      user.error = action.payload.error;
+      user.error = action.payload;
       user.loading = false;
     },
   },
@@ -37,7 +37,7 @@ export const signin = (email, password) => async (dispatch) => {
       payload: { email, password },
     });
 
-    const { data } = await axios.get('/api/users/signin', {
+    const { data } = await axios.post('/api/users/signin', {
       email,
       password,
     });
