@@ -1,7 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, useRoutes } from 'react-router-dom';
 import { NavBar } from './components';
-import { CartScreen, HomeScreen, ProductScreen } from './screens';
+import {
+  CartScreen,
+  HomeScreen,
+  ProductScreen,
+  SigninScreen,
+  SignupScreen,
+} from './screens';
 
 const ShoppingCartRoutes = () =>
   useRoutes([
@@ -16,6 +22,8 @@ const App = () => {
       <ShoppingCartRoutes />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/signin" element={<SigninScreen />} />
+        <Route path="/signup" element={<SignupScreen />} />
         <Route path="/products/:id" element={<ProductScreen />} />
       </Routes>
     </BrowserRouter>

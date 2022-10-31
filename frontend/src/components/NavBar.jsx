@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/outline';
 
 import logo from '../assets/logo.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const user = {
   name: 'yunlu',
@@ -44,7 +44,6 @@ function classNames(...classes) {
 }
 
 const NavBar = () => {
-  const dispatch = useDispatch();
   // cartSlice -> name is "cartItem"
   // cartSlice -> initial "items"
   const cartItem = useSelector((state) => state.cartItem);

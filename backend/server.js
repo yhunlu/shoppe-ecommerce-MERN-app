@@ -5,15 +5,16 @@ import colors from 'colors';
 import path from 'path';
 
 import connectDB from './config/connectDB.js';
-import products from './data/products.js';
-import users from './data/users.js';
 import productRouter from './routers/productRouter.js';
+import userRouter from './routers/userRouter.js';
 
 dotenv.config();
 
 connectDB();
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -23,9 +24,7 @@ app.use(express.json());
 
 app.use('/api/products', productRouter);
 
-app.get('/api/users', (req, res) => {
-  res.send(users);
-});
+app.get('/api/users', userRouter);
 
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
