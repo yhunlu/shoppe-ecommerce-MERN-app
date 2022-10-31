@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
-  : null;
+  : { userInfo: [] };
 
 const userSlice = createSlice({
   name: 'user',

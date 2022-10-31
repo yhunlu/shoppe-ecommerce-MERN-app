@@ -6,17 +6,20 @@ import {
   MenuIcon,
   ShoppingBagIcon,
   XIcon,
+  UserIcon,
 } from '@heroicons/react/outline';
 
 import logo from '../assets/logo.png';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-const user = {
-  name: 'yunlu',
-  email: 'chelsea.hagon@example.com',
-  imageUrl:
-    'https://lh3.googleusercontent.com/ogw/AOh-ky1n90iEadqapvW4khtAkqdDTjUIC_hXzJCjhWGt=s64-c-mo',
-};
+// const user = {
+//   name: 'yunlu',
+//   email: 'chelsea.hagon@example.com',
+//   imageUrl:
+//     'https://lh3.googleusercontent.com/ogw/AOh-ky1n90iEadqapvW4khtAkqdDTjUIC_hXzJCjhWGt=s64-c-mo',
+// };
+
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Calendar', href: '#', current: false },
@@ -48,6 +51,11 @@ const NavBar = () => {
   // cartSlice -> initial "items"
   const cartItem = useSelector((state) => state.cartItem);
   const { Items } = cartItem;
+
+  // cartSlice -> name is "cartItem"
+  // cartSlice -> initial "items"
+  const user = useSelector((state) => state.users);
+  const { userInfo, loading, error } = user;
 
   return (
     <>
@@ -138,45 +146,57 @@ const NavBar = () => {
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
                   {/* Profile dropdown */}
-                  <Menu as="div" className="flex-shrink-0 relative ml-5">
-                    <div>
-                      <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src={user.imageUrl}
-                          alt=""
-                        />
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
+                  {userInfo.email ? (
+                    <Menu as="div" className="flex-shrink-0 relative ml-5">
+                      <div>
+                        <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                          <span className="sr-only">Open user menu</span>
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src={userInfo.imageUrl}
+                            alt=""
+                          />
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">
+                          {userNavigation.map((item) => (
+                            <Menu.Item key={item.name}>
+                              {({ active }) => (
+                                <a
+                                  href={item.href}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block py-2 px-4 text-sm text-gray-700'
+                                  )}
+                                >
+                                  {item.name}
+                                </a>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  ) : (
+                    <Link
+                      to="/signin"
+                      className="group flex items-center mx-5 bg-white rounded-full hover:text-amber-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
                     >
-                      <Menu.Items className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">
-                        {userNavigation.map((item) => (
-                          <Menu.Item key={item.name}>
-                            {({ active }) => (
-                              <a
-                                href={item.href}
-                                className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block py-2 px-4 text-sm text-gray-700'
-                                )}
-                              >
-                                {item.name}
-                              </a>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
+                      <UserIcon
+                        className="flex-shrink-0 mx-5 w-6 h-6 text-gray-400 hover:text-gray-600"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  )}
 
                   {/* <a
                     href="#"
@@ -208,46 +228,75 @@ const NavBar = () => {
               </div>
               <div className="border-t border-gray-200 pt-4 pb-3">
                 <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src={user.imageUrl}
-                      alt=""
-                    />
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">
-                      {user.name}
-                    </div>
-                    <div className="text-sm font-medium text-gray-500">
-                      {user.email}
-                    </div>
-                  </div>
+                  {userInfo.email ? (
+                    <>
+                      {' '}
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          src={userInfo.imageUrl}
+                          alt=""
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <div className="text-base font-medium text-gray-800">
+                          {userInfo.name}
+                        </div>
+                        <div className="text-sm font-medium text-gray-500">
+                          {userInfo.email}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      to="/signin"
+                      className="group flex items-center mx-5 bg-white rounded-full hover:text-amber-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
+                    >
+                      <UserIcon
+                        className="flex-shrink-0 mx-7 w-6 h-6 text-gray-400 hover:text-gray-600"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  )}
                   <a
                     href="/cart"
                     className="group -m-2 p-2 ml-10 flex items-center bg-white rounded-full hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                   >
                     <ShoppingBagIcon
-                      className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                      className={classNames(
+                        Items?.length > 0
+                          ? 'text-green-600 hover:text-green-400'
+                          : 'text-gray-400 group-hover:text-gray-500',
+                        'flex-shrink-0 h-6 w-6'
+                      )}
                       aria-hidden="true"
                     />
-                    <span className="ml-1 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      0
+                    <span
+                      className={classNames(
+                        Items?.length > 0
+                          ? '-mt-5 -ml-1 inline-flex items-center px-2.5 py-1 rounded-full bg-green-600 text-white'
+                          : 'text-gray-700 group-hover:text-gray-800',
+                        'font-bold  text-sm'
+                      )}
+                    >
+                      {Items?.length > 0 ? Items.length : ''}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
                 </div>
-                <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-                  {userNavigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
+                {userInfo.email ? (
+                  <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
+                    {userNavigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             </Popover.Panel>
           </>
