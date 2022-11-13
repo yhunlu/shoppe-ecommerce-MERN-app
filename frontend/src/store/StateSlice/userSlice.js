@@ -20,11 +20,14 @@ const userSlice = createSlice({
       user.error = action.payload;
       user.loading = false;
     },
+    USER_SIGNOUT: (user, action) => {
+      return { userInfo: {}}
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL } =
+export const { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT } =
   userSlice.actions;
 
 export default userSlice.reducer;
@@ -53,4 +56,10 @@ export const signin = (email, password) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const signout = () => (dispatch) => {
+  localStorage.removeItem('userInfo');
+  dispatch({ type: USER_SIGNOUT.type });
+  document.location.href = '/signin';
 };

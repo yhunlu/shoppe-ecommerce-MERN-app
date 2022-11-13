@@ -14,7 +14,7 @@ const CartScreen = () => {
   // cartSlice -> name is "cartItem"
   // cartSlice -> initial "items"
   const cartItem = useSelector((state) => state.cartItem);
-  const { Items: products, loading } = cartItem;
+  const { Items: products } = cartItem;
 
   useEffect(() => {
     if (id) {

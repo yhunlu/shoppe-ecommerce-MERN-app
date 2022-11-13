@@ -10,18 +10,15 @@ import {
 } from '@heroicons/react/outline';
 
 import logo from '../assets/logo.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { signout } from '../store/StateSlice/userSlice';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Calendar', href: '#', current: false },
   { name: 'Teams', href: '#', current: false },
   { name: 'Directory', href: '#', current: false },
-];
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Sign out', href: '#' },
 ];
 
 const adminNavigation = [
@@ -40,15 +37,37 @@ function classNames(...classes) {
 }
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   // cartSlice -> name is "cartItem"
   // cartSlice -> initial "items"
   const cartItem = useSelector((state) => state.cartItem);
   const { Items } = cartItem;
 
-  // cartSlice -> name is "cartItem"
-  // cartSlice -> initial "items"
+  // cartSlice -> name is "user"
+  // cartSlice -> initial "userInfo"
   const user = useSelector((state) => state.users);
-  const { userInfo, loading, error } = user;
+  const { userInfo } = user;
+
+  const signoutHandler = () => {
+    dispatch(signout());
+  };
+
+  const userNavigation = [
+    {
+      name: 'Your Profile',
+      href: '/myprofile',
+      onClick: () => {
+        console.log('my profile');
+      },
+    },
+    {
+      name: 'Sign out',
+      href: '#signin',
+      onClick: () => {
+        signoutHandler();
+      },
+    },
+  ];
 
   return (
     <>
@@ -113,8 +132,8 @@ const NavBar = () => {
                   </Popover.Button>
                 </div>
                 <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                  <a
-                    href="/cart"
+                  <Link
+                    to="/cart"
                     className="group -m-2 p-2 flex items-center bg-white rounded-full hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                   >
                     <ShoppingBagIcon
@@ -137,7 +156,7 @@ const NavBar = () => {
                       {Items?.length > 0 ? Items.length : ''}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
-                  </a>
+                  </Link>
                   {/* Profile dropdown */}
                   {userInfo.email ? (
                     <Menu as="div" className="flex-shrink-0 relative ml-5">
@@ -164,15 +183,16 @@ const NavBar = () => {
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <a
-                                  href={item.href}
+                                <Link
+                                  to={item.href}
+                                  onClick={item.onClick}
                                   className={classNames(
                                     active ? 'bg-gray-100' : '',
                                     'block py-2 px-4 text-sm text-gray-700'
                                   )}
                                 >
                                   {item.name}
-                                </a>
+                                </Link>
                               )}
                             </Menu.Item>
                           ))}
@@ -204,9 +224,9 @@ const NavBar = () => {
             <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
               <div className="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
                       item.current
@@ -216,7 +236,7 @@ const NavBar = () => {
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
               <div className="border-t border-gray-200 pt-4 pb-3">
@@ -251,8 +271,8 @@ const NavBar = () => {
                       />
                     </Link>
                   )}
-                  <a
-                    href="/cart"
+                  <Link
+                    to="/cart"
                     className="group -m-2 p-2 ml-10 flex items-center bg-white rounded-full hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                   >
                     <ShoppingBagIcon
@@ -275,18 +295,19 @@ const NavBar = () => {
                       {Items?.length > 0 ? Items.length : ''}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
-                  </a>
+                  </Link>
                 </div>
                 {userInfo.email ? (
                   <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
                     {userNavigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
+                        onClick={item.onClick}
                         className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 ) : null}

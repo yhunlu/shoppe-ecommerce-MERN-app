@@ -26,6 +26,7 @@ const cartSlice = createSlice({
           Items: [...cartItem.Items, item],
         };
       }
+
     },
     CART_REMOVE_ITEM: (cartItem, action) => {
       return {
