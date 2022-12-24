@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import signinpic from '../assets/signin.jpg';
@@ -23,6 +22,24 @@ const SigninScreen = () => {
     e.preventDefault();
     dispatch(signin(email, password));
   };
+
+  function handleCallbackResponse(response) {
+    console.log('Encoded JWT ID token' + response.credential);
+  }
+
+  useEffect(() => {
+    // gloabal google
+    // eslint-disable-next-line no-undef
+    google.accounts.id.initialize({
+      client_id: `${process.env.REACT_APP_GOOGLE_CLIENT_ID}`,
+      callback: handleCallbackResponse,
+    });
+    // eslint-disable-next-line no-undef
+    google.accounts.id.renderButton(document.getElementById('signInDiv'), {
+      theme: 'outline',
+      size: 'large',
+    });
+  }, []);
 
   useEffect(() => {
     if (userInfo.email) {
@@ -49,14 +66,15 @@ const SigninScreen = () => {
                   </p>
 
                   <div className="mt-4 grid grid-cols-1 gap-3">
-                    <div>
-                      <a
-                        href="/"
+                    <div className="w-full inline-flex justify-center">
+                      {/* <a
+                        href="/google-login"
                         className="w-full inline-flex justify-center py-3 px-3 border border-gray-300 rounded-full shadow-md bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                       >
                         <span className="sr-only">Sign in with Google</span>
                         <FcGoogle className="text-4xl" />
-                      </a>
+                      </a> */}
+                      <div id="signInDiv"></div>
                     </div>
                   </div>
                 </div>
