@@ -21,14 +21,18 @@ const userSlice = createSlice({
       user.loading = false;
     },
     USER_SIGNOUT: (user, action) => {
-      return { userInfo: {}}
-    }
+      return { userInfo: {} };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT } =
-  userSlice.actions;
+export const {
+  USER_SIGNIN_REQUEST,
+  USER_SIGNIN_SUCCESS,
+  USER_SIGNIN_FAIL,
+  USER_SIGNOUT,
+} = userSlice.actions;
 
 export default userSlice.reducer;
 
@@ -58,8 +62,39 @@ export const signin = (email, password) => async (dispatch) => {
   }
 };
 
+export const signinasauth = (userdata) => async (dispatch) => {
+  const { email, picture: imageUrl, family_name, given_name } = userdata;
+  const name = `${given_name} ${family_name}`;
+  const google_auth = true;
+
+  try {
+    dispatch({
+      type: USER_SIGNIN_REQUEST.type,
+      payload: { name, email, imageUrl, google_auth },
+    });
+
+    dispatch({
+      type: USER_SIGNIN_SUCCESS.type,
+      payload: { name, email, imageUrl, google_auth },
+    });
+    localStorage.setItem(
+      'userGoogleAuth',
+      JSON.stringify(name, email, imageUrl, google_auth)
+    );
+  } catch (error) {
+    dispatch({
+      type: USER_SIGNIN_FAIL.type,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const signout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
+  localStorage.removeItem('userGoogleAuth');
   dispatch({ type: USER_SIGNOUT.type });
   document.location.href = '/signin';
 };

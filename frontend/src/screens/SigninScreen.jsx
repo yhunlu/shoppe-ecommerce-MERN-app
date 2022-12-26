@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import signinpic from '../assets/signin.jpg';
-import { signin } from '../store/StateSlice/userSlice';
+import { signin, signinasauth } from '../store/StateSlice/userSlice';
+import jwt_decode from 'jwt-decode';
 
 const SigninScreen = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const SigninScreen = () => {
   const redirect = redirectInUrl ? redirectInUrl : '/';
 
   const userSignin = useSelector((state) => state.users);
-  const { userInfo, loading, error } = userSignin;
+  const { userInfo } = userSignin;
 
   const dispatch = useDispatch();
 
@@ -24,25 +25,26 @@ const SigninScreen = () => {
   };
 
   function handleCallbackResponse(response) {
-    console.log('Encoded JWT ID token' + response.credential);
+    var userObject = jwt_decode(response.credential);
+    dispatch(signinasauth(userObject));
   }
 
   useEffect(() => {
     // gloabal google
     // eslint-disable-next-line no-undef
-    google.accounts.id.initialize({
+    google?.accounts.id.initialize({
       client_id: `${process.env.REACT_APP_GOOGLE_CLIENT_ID}`,
       callback: handleCallbackResponse,
     });
     // eslint-disable-next-line no-undef
-    google.accounts.id.renderButton(document.getElementById('signInDiv'), {
+    google?.accounts.id.renderButton(document.getElementById('signInDiv'), {
       theme: 'outline',
       size: 'large',
     });
   }, []);
 
   useEffect(() => {
-    if (userInfo.email) {
+    if (userInfo?.email) {
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo]);
