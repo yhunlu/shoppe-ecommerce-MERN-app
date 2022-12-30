@@ -62,7 +62,7 @@ const NavBar = () => {
     },
     {
       name: 'Sign out',
-      href: '#signin',
+      href: '/signin',
       onClick: () => {
         signoutHandler();
       },

@@ -5,6 +5,8 @@ module.exports = {
     fontFamily: {
       display: ['Open Sans', 'sans-serif'],
       body: ['Open Sans', 'sans-serif'],
+      sans: ['Mulish', 'sans-serif'],
+      mono: ['Rokkitt', 'monospace'],
     },
     extend: {
       screens: {

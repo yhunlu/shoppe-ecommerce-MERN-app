@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import signinpic from '../assets/signin.jpg';
 import { signin, signinasauth } from '../store/StateSlice/userSlice';
 import jwt_decode from 'jwt-decode';
+import LoadingBox from './../components/LoadingBox';
+import MessageBox from './../components/MessageBox';
 
 const SigninScreen = () => {
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ const SigninScreen = () => {
   const redirect = redirectInUrl ? redirectInUrl : '/';
 
   const userSignin = useSelector((state) => state.users);
-  const { userInfo } = userSignin;
+  const { userInfo, loading, error } = userSignin;
 
   const dispatch = useDispatch();
 
@@ -69,13 +71,6 @@ const SigninScreen = () => {
 
                   <div className="mt-4 grid grid-cols-1 gap-3">
                     <div className="w-full inline-flex justify-center">
-                      {/* <a
-                        href="/google-login"
-                        className="w-full inline-flex justify-center py-3 px-3 border border-gray-300 rounded-full shadow-md bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                      >
-                        <span className="sr-only">Sign in with Google</span>
-                        <FcGoogle className="text-4xl" />
-                      </a> */}
                       <div id="signInDiv"></div>
                     </div>
                   </div>
@@ -95,7 +90,6 @@ const SigninScreen = () => {
                   </div>
                 </div>
               </div>
-
               <div className="mt-6">
                 <form onSubmit={submitHandler} className="space-y-6">
                   <div>
@@ -165,18 +159,37 @@ const SigninScreen = () => {
                       </a>
                     </div>
                   </div>
-
+                  {loading && <LoadingBox></LoadingBox>}
+                  {error && <MessageBox variant="danger">{error}</MessageBox>}
                   <div>
                     <button
                       type="submit"
                       className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                     >
-                      Sign in
+                      Sign IN
                     </button>
                   </div>
                 </form>
               </div>
             </div>
+          </div>
+          <div className="mt-2 relative">
+            <div
+              className="absolute inset-0 flex items-center"
+              aria-hidden="true"
+            >
+              <div className="w-full border-t border-gray-300" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">
+                New to Shoppe?
+              </span>
+            </div>
+          </div>
+          <div className="relative flex justify-center text-xl font-bold text-green-700 hover:text-green-300">
+            <Link to={redirect ? `/signup?redirect=${redirect}` : '/signup'}>
+              Sign UP
+            </Link>
           </div>
         </div>
         <div className="hidden lg:block relative w-0 flex-1">
